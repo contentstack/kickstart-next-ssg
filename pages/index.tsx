@@ -1,3 +1,4 @@
+import DOMPurify from "dompurify";
 import { getPage, initLivePreview } from "@/lib/contentstack";
 import { Page } from "@/lib/types";
 import Image from "next/image";
@@ -61,7 +62,9 @@ export default function Index({ staticPropsPage }: PageProps) {
         {page?.rich_text ? (
           <div
             {...(page?.$ && page?.$.rich_text)}
-            dangerouslySetInnerHTML={{ __html: page?.rich_text }}
+            dangerouslySetInnerHTML={{
+              __html: DOMPurify.sanitize(page?.rich_text),
+            }}
           />
         ) : null}
 
@@ -102,7 +105,9 @@ export default function Index({ staticPropsPage }: PageProps) {
                   {block.copy ? (
                     <div
                       {...(block?.$ && block?.$.copy)}
-                      dangerouslySetInnerHTML={{ __html: block.copy }}
+                      dangerouslySetInnerHTML={{
+                        __html: DOMPurify.sanitize(block.copy),
+                      }}
                       className="prose"
                     />
                   ) : null}
