@@ -1,11 +1,13 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: "export",
   images: {
-    unoptimized: true,
     remotePatterns: [
       {
-        hostname: "eu-images.contentstack.com",
+        hostname: "images.contentstack.io",
+      },
+      {
+        protocol: "https",
+        hostname: "*-images.contentstack.com",
       },
     ],
   },
