@@ -1,4 +1,4 @@
-import DOMPurify from "dompurify";
+import DOMPurify from "isomorphic-dompurify";
 import { getPage, initLivePreview } from "@/lib/contentstack";
 import { Page } from "@/lib/types";
 import Image from "next/image";
