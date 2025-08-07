@@ -1,16 +1,26 @@
-import contentstack, { Region, QueryOperation } from "@contentstack/delivery-sdk"
+import contentstack, { QueryOperation } from "@contentstack/delivery-sdk"
 import ContentstackLivePreview, { IStackSdk } from "@contentstack/live-preview-utils";
 import { Page } from "./types";
+import { getContentstackEndpoints, getRegionForString } from "@timbenniks/contentstack-endpoints";
+
+const region = getRegionForString(process.env.NEXT_PUBLIC_CONTENTSTACK_REGION as string)// object with all endpoints for region.
+const endpoints = getContentstackEndpoints(region, true)
 
 export const stack = contentstack.stack({
   apiKey: process.env.NEXT_PUBLIC_CONTENTSTACK_API_KEY as string,
   deliveryToken: process.env.NEXT_PUBLIC_CONTENTSTACK_DELIVERY_TOKEN as string,
   environment: process.env.NEXT_PUBLIC_CONTENTSTACK_ENVIRONMENT as string,
-  region: process.env.NEXT_PUBLIC_CONTENTSTACK_REGION === 'EU' ? Region.EU : Region.US,
+  region: region,
+  // Setting the host for content delivery based on the region or environment variables
+  // This is done for internal testing purposes at Contentstack, you can omit this if you have set a region above.
+  host: process.env.NEXT_PUBLIC_CONTENTSTACK_CONTENT_DELIVERY || endpoints && endpoints.contentDelivery,
+
   live_preview: {
     enable: process.env.NEXT_PUBLIC_CONTENTSTACK_PREVIEW === 'true',
     preview_token: process.env.NEXT_PUBLIC_CONTENTSTACK_PREVIEW_TOKEN,
-    host: process.env.NEXT_PUBLIC_CONTENTSTACK_REGION === 'EU' ? "eu-rest-preview.contentstack.com" : "rest-preview.contentstack.com",
+    // Setting the host for live preview based on the region
+    // for internal testing purposes at Contentstack we look for a custom host in the env vars, you do not have to do this.
+    host: process.env.NEXT_PUBLIC_CONTENTSTACK_PREVIEW_HOST || endpoints && endpoints.preview
   }
 });
 
@@ -25,10 +35,9 @@ export function initLivePreview() {
       environment: process.env.NEXT_PUBLIC_CONTENTSTACK_ENVIRONMENT as string,
     },
     clientUrlParams: {
-      host:
-        process.env.NEXT_PUBLIC_CONTENTSTACK_REGION === "EU"
-          ? "eu-app.contentstack.com"
-          : "app.contentstack.com",
+      // Setting the client URL parameters for live preview
+      // for internal testing purposes at Contentstack we look for a custom host in the env vars, you do not have to do this.
+      host: process.env.NEXT_PUBLIC_CONTENTSTACK_CONTENT_APPLICATION || endpoints && endpoints.application
     },
     editButton: {
       enable: true,
