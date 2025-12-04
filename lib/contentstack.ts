@@ -3,14 +3,14 @@ import ContentstackLivePreview, { IStackSdk } from "@contentstack/live-preview-u
 import { Page } from "./types";
 import { getContentstackEndpoints, getRegionForString } from "@timbenniks/contentstack-endpoints";
 
-const region = getRegionForString(process.env.NEXT_PUBLIC_CONTENTSTACK_REGION as string)// object with all endpoints for region.
-const endpoints = getContentstackEndpoints(region, true)
+const region = getRegionForString(process.env.NEXT_PUBLIC_CONTENTSTACK_REGION as string)
+const endpoints = getContentstackEndpoints(process.env.NEXT_PUBLIC_CONTENTSTACK_REGION, true)
 
 export const stack = contentstack.stack({
   apiKey: process.env.NEXT_PUBLIC_CONTENTSTACK_API_KEY as string,
   deliveryToken: process.env.NEXT_PUBLIC_CONTENTSTACK_DELIVERY_TOKEN as string,
   environment: process.env.NEXT_PUBLIC_CONTENTSTACK_ENVIRONMENT as string,
-  region: region,
+  region: region ? region : process.env.NEXT_PUBLIC_CONTENTSTACK_REGION as any,
   // Setting the host for content delivery based on the region or environment variables
   // This is done for internal testing purposes at Contentstack, you can omit this if you have set a region above.
   host: process.env.NEXT_PUBLIC_CONTENTSTACK_CONTENT_DELIVERY || endpoints && endpoints.contentDelivery,
