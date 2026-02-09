@@ -1,6 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
+    minimumCacheTTL: 60,
     // Configure allowed hostnames for Next.js Image Optimization
     remotePatterns: [
       ...(process.env.NEXT_PUBLIC_CONTENTSTACK_IMAGE_HOSTNAME
