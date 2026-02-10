@@ -1,6 +1,6 @@
 {
   "name": "kickstart-next-ssg",
-  "version": "1.0.9",
+  "version": "1.2.0",
   "private": false,
   "repository": {
     "type": "git",
@@ -14,16 +14,16 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "eslint . --ext .ts,.tsx"
   },
   "dependencies": {
-    "@contentstack/delivery-sdk": "^4.10.6",
-    "@contentstack/live-preview-utils": "^4.1.2",
+    "@contentstack/delivery-sdk": "^4.11.0",
+    "@contentstack/live-preview-utils": "^4.2.1",
     "@timbenniks/contentstack-endpoints": "^2.1.0",
     "isomorphic-dompurify": "^2.33.0",
-    "next": "15.5.9",
-    "react": "^19.2.1",
-    "react-dom": "^19.2.1"
+    "next": "^16",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
@@ -32,7 +32,7 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
-    "eslint-config-next": "^15",
+    "eslint-config-next": "^16",
     "tailwindcss": "^4",
     "typescript": "^5"
   }
