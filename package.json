@@ -1,6 +1,6 @@
 {
   "name": "kickstart-next-ssg",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "private": false,
   "repository": {
     "type": "git",
@@ -18,10 +18,10 @@
   },
   "dependencies": {
     "@contentstack/delivery-sdk": "^5.1.2",
-    "@contentstack/live-preview-utils": "^4.2.1",
+    "@contentstack/live-preview-utils": "^4.3.0",
     "@timbenniks/contentstack-endpoints": "^2.1.0",
-    "isomorphic-dompurify": "^2.33.0",
-    "next": "^16",
+    "isomorphic-dompurify": "^3.6.0",
+    "next": "^16.2.1",
     "react": "^19.2.4",
     "react-dom": "^19.2.4"
   },
