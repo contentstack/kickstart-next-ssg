@@ -14,7 +14,11 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint . --ext .ts,.tsx"
+    "lint": "eslint . --ext .ts,.tsx",
+    "security": "snyk test",
+    "security:all": "snyk test --all-projects",
+    "security:monitor": "snyk monitor",
+    "security:vulnerabilities-only": "snyk test --severity-threshold=low"
   },
   "dependencies": {
     "@contentstack/delivery-sdk": "^5.2.0",
@@ -37,6 +41,8 @@
     "typescript": "^5"
   },
   "overrides": {
+    "dompurify": "^3.3.3",
+    "follow-redirects": "1.16.0",
     "postcss": "^8.5.10",
     "uuid": "^14.0.0"
   }
