@@ -1,0 +1,17 @@
+{
+  "command": "auth:login",
+  "module": "login",
+  "userId": "8daa87bf-1e28-5f23-8d8f-4fa78710ca78",
+  "email": "om.pawar@contentstack.com",
+  "sessionId": "dskrbXoAAmDEx5fZPTiQjZ",
+  "apiKey": "blt24ae66d4b6dc2080",
+  "orgId": "",
+  "authenticationMethod": "Basic Auth",
+  "startTimestamp": "2026-03-13T06:28:27.868Z",
+  "MachineEnvironment": {
+    "nodeVersion": "v24.12.0",
+    "os": "darwin",
+    "hostname": "OmPawar-Mac",
+    "CLI_VERSION": "1.59.0"
+  }
+}
