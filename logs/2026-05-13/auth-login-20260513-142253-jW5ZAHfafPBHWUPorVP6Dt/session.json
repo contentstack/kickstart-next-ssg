@@ -1,0 +1,17 @@
+{
+  "command": "auth:login",
+  "module": "login",
+  "userId": "8daa87bf-1e28-5f23-8d8f-4fa78710ca78",
+  "email": "",
+  "sessionId": "jW5ZAHfafPBHWUPorVP6Dt",
+  "apiKey": "blt53c80624d6f719b1",
+  "orgId": "",
+  "authenticationMethod": "",
+  "startTimestamp": "2026-05-13T08:52:53.362Z",
+  "MachineEnvironment": {
+    "nodeVersion": "v25.9.0",
+    "os": "darwin",
+    "hostname": "OmPawar-Mac",
+    "CLI_VERSION": "1.59.0"
+  }
+}
