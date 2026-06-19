@@ -1,26 +1,25 @@
 import contentstack, { QueryOperation } from "@contentstack/delivery-sdk"
 import ContentstackLivePreview, { IStackSdk } from "@contentstack/live-preview-utils";
 import { Page } from "./types";
-import { getContentstackEndpoints, getRegionForString } from "@timbenniks/contentstack-endpoints";
+import { getContentstackEndpoint, type ContentstackEndpoints } from "@contentstack/utils";
 
-const region = getRegionForString(process.env.NEXT_PUBLIC_CONTENTSTACK_REGION as string)
-const endpoints = getContentstackEndpoints(process.env.NEXT_PUBLIC_CONTENTSTACK_REGION, true)
+const endpoints = getContentstackEndpoint(process.env.NEXT_PUBLIC_CONTENTSTACK_REGION || 'NA', '', true) as ContentstackEndpoints
 
 export const stack = contentstack.stack({
   apiKey: process.env.NEXT_PUBLIC_CONTENTSTACK_API_KEY as string,
   deliveryToken: process.env.NEXT_PUBLIC_CONTENTSTACK_DELIVERY_TOKEN as string,
   environment: process.env.NEXT_PUBLIC_CONTENTSTACK_ENVIRONMENT as string,
-  region: region ? region : process.env.NEXT_PUBLIC_CONTENTSTACK_REGION as any,
+  region: process.env.NEXT_PUBLIC_CONTENTSTACK_REGION as any,
   // Setting the host for content delivery based on the region or environment variables
-  // This is done for internal testing purposes at Contentstack, you can omit this if you have set a region above.
-  host: process.env.NEXT_PUBLIC_CONTENTSTACK_CONTENT_DELIVERY || endpoints && endpoints.contentDelivery,
+  // for custom or dedicated Contentstack environments, override each endpoint individually using environment variables.
+  host: process.env.NEXT_PUBLIC_CONTENTSTACK_CONTENT_DELIVERY || endpoints.contentDelivery as string,
 
   live_preview: {
     enable: process.env.NEXT_PUBLIC_CONTENTSTACK_PREVIEW === 'true',
     preview_token: process.env.NEXT_PUBLIC_CONTENTSTACK_PREVIEW_TOKEN,
     // Setting the host for live preview based on the region
-    // for internal testing purposes at Contentstack we look for a custom host in the env vars, you do not have to do this.
-    host: process.env.NEXT_PUBLIC_CONTENTSTACK_PREVIEW_HOST || endpoints && endpoints.preview
+    // for custom or dedicated Contentstack environments, override each endpoint individually using environment variables.
+    host: process.env.NEXT_PUBLIC_CONTENTSTACK_PREVIEW_HOST || endpoints.preview as string
   }
 });
 
@@ -36,8 +35,8 @@ export function initLivePreview() {
     },
     clientUrlParams: {
       // Setting the client URL parameters for live preview
-      // for internal testing purposes at Contentstack we look for a custom host in the env vars, you do not have to do this.
-      host: process.env.NEXT_PUBLIC_CONTENTSTACK_CONTENT_APPLICATION || endpoints && endpoints.application
+      // for custom or dedicated Contentstack environments, override each endpoint individually using environment variables.
+      host: process.env.NEXT_PUBLIC_CONTENTSTACK_CONTENT_APPLICATION || endpoints.application as string
     },
     editButton: {
       enable: true,
