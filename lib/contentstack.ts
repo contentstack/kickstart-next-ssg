@@ -3,8 +3,7 @@ import ContentstackLivePreview, { IStackSdk } from "@contentstack/live-preview-u
 import { Page } from "./types";
 import { getContentstackEndpoint, type ContentstackEndpoints } from "@contentstack/utils";
 
-// region resolution is now handled by getContentstackEndpoint
-const endpoints = getContentstackEndpoints(process.env.NEXT_PUBLIC_CONTENTSTACK_REGION, true)
+const endpoints = getContentstackEndpoint(process.env.NEXT_PUBLIC_CONTENTSTACK_REGION || 'NA', '', true) as ContentstackEndpoints
 
 export const stack = contentstack.stack({
   apiKey: process.env.NEXT_PUBLIC_CONTENTSTACK_API_KEY as string,
